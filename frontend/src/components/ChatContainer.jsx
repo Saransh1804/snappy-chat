@@ -145,11 +145,14 @@ function ChatContainer({ currentChat, currentUser, socket }) {
 
   const handleSendMsg = async (msg) => {
     const data = JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY));
+
     socket.current.emit('send-msg', {
       to: currentChat._id,
       from: data._id,
       msg,
     });
+
+    
     await axios.post(sendMessageRoute, {
       from: data._id,
       to: currentChat._id,
